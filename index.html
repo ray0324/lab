@@ -7,9 +7,10 @@
   <title>汉字Unicode对照表</title>
   <style>
     pre {
+      text-align: justify;
       font-size: 14px;
       line-height: 1.5;
-      font-family: 'Fira Code', 'Cascadia Code', 'Microsoft YaHei Mono', Consolas, 'Courier New', monospace;
+      font-family: Consolas, 'Fira Code', 'Cascadia Code', 'Microsoft YaHei Mono', 'Courier New', monospace;
     }
   </style>
 </head>
@@ -19,8 +20,11 @@
   <pre id="chars">loading...</pre>
   <script>
 
-    var header = 'U+  0 1 2 3 4 5 6 7 8 9 A B C D E F \n';
-    var deliver = '--------------------------------------------------\n';
+    var header =
+      '\n               汉字Unicode对照表 \n\n' +
+      '------------------------------------------------------\n' +
+      'U +   0 1 2 3 4 5 6 7 8 9 A B C D E F \n' +
+      '------------------------------------------------------\n';
 
     function genChars() {
       var chars = [];
@@ -41,7 +45,10 @@
     }
 
     setTimeout(function () {
-      document.querySelector('#chars').innerHTML = header + deliver + genChars().join('');
+      var start = Date.now();
+      document.querySelector('#chars').innerHTML = header + genChars().join('');
+      var end = Date.now();
+      console.log(end - start);
     }, 0);
 
   </script>
