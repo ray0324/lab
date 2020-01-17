@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Autoprefixer online</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+  <style>
+    body{ margin:0; }
+    nav{height: 40px;border-bottom: 1px solid #e0e0e0;display: flex; padding:10px 16px; align-items: center;}
+    nav .logo{display: block;width:52px;height: 40px;box-sizing: border-box;}
+    nav h2{margin: 0 0 0 20px;}
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <img class="logo" src="./assets/images/autoprefixer.svg" alt="">
+    <h2>Autoprefixer</h2>
+  </nav>
+  <div id="container" style="width:800px;height:600px;border: 1px solid #e0e0e0;"></div>
+
+  <!-- OR ANY OTHER AMD LOADER HERE INSTEAD OF loader.js -->
+  <script src="https://unpkg.com/monaco-editor@0.19.3/min/vs/loader.js"></script>
+  <script>
+    require.config({ paths: { 'vs': 'https://unpkg.com/monaco-editor@0.19.3/min/vs' } });
+
+    require(['vs/editor/editor.main'], function () {
+      var editor = monaco.editor.create(document.getElementById('container'), {
+        language: 'css',
+        lineNumbers: "on",
+        tabSize: 2,
+        folding: false,
+        smoothScrolling: true,
+        minimap: {
+          enabled: false
+        }
+      });
+
+      console.log(editor)
+
+    });
+  </script>
+</body>
+
+</html>
