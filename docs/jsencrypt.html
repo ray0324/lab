@@ -114,38 +114,50 @@ MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBALwcyvYIGmhk+be320JWWsq1OYjiM0lz
 
   </main>
 
-  <!--引入jsencrypt.js-->
-  <script src="./assets/js/jsencrypt-3.0.0-beta.1.js"></script>
+  <script src="https://unpkg.com/requirejs@2.3.6/require.js"></script>
   <script type="text/javascript">
+    require.config({
+      paths: {
+        jsencrypt: 'https://unpkg.com/jsencrypt@3.2.1/bin/jsencrypt'
+      }
+    });
+
     document.querySelector('.button').addEventListener('click', function () {
 
-      //公钥
-      var PUBLIC_KEY = document.querySelector('#pubkey').value;
-      //私钥
-      var PRIVATE_KEY = document.querySelector('#prikey').value;
+      require(['jsencrypt'], function (JSEncrypt) {
+        //公钥
+        var PUBLIC_KEY = document.querySelector('#pubkey').value;
+        //私钥
+        var PRIVATE_KEY = document.querySelector('#prikey').value;
 
-      //使用公钥加密
-      var encrypt = new JSEncrypt();
-      encrypt.setPublicKey(PUBLIC_KEY);
+        //使用公钥加密
+        var encrypt = new JSEncrypt();
+        encrypt.setPublicKey(PUBLIC_KEY);
 
-      var planText = document.querySelector('#msg').value;
-      var encryptedText = encrypt.encrypt(planText);
+        var planText = document.querySelector('#msg').value;
+        var encryptedText = encrypt.encrypt(planText);
 
-      document.querySelector('#cipher').value = encrypt.encrypt(planText);
+        document.querySelector('#cipher').value = encrypt.encrypt(planText);
 
-      console.log('加密前数据: %o', planText);
-      console.log('加密后数据: %o', encryptedText);
+        console.log('加密前数据: %o', planText);
+        console.log('加密后数据: %o', encryptedText);
 
 
-      // 使用私钥钥加密
-      var decrypt = new JSEncrypt();
-      decrypt.setPrivateKey(PRIVATE_KEY);
+        // 使用私钥钥加密
+        var decrypt = new JSEncrypt();
+        decrypt.setPrivateKey(PRIVATE_KEY);
 
-      console.log('解密....');
-      console.log('解密前数据: %o', encryptedText);
-      console.log('解密后数据: %o', decrypt.decrypt(encryptedText));
+        console.log('解密....');
+        console.log('解密前数据: %o', encryptedText);
+        console.log('解密后数据: %o', decrypt.decrypt(encryptedText));
+      })
 
     })
+
+
+
+
+
 
   </script>
 

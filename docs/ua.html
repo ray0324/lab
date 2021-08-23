@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>用户代理信息</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 26px;
+    }
+
+    h2 {
+      margin: 20px 0;
+      box-sizing: border-box;
+    }
+
+    textarea {
+      display: block;
+      width: 100%;
+      margin-top: 32px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h2>navigator.userAgent</h2>
+  <!-- Target -->
+  <textarea id="ua" rows="5"></textarea>
+
+  <!-- Trigger -->
+  <button class="btn" data-clipboard-action="copy" data-clipboard-target="#ua">
+    复制到粘贴板
+  </button>
+
+  <h2>navigator.appVersion</h2>
+  <!-- Target -->
+  <textarea id="appver" rows="5"></textarea>
+
+  <!-- Trigger -->
+  <button class="btn" data-clipboard-action="copy" data-clipboard-target="#appver">
+    复制到粘贴板
+  </button>
+
+  <script src="https://unpkg.com/requirejs@2.3.6/require.js"></script>
+
+  <script>
+
+    require.config({
+      paths: {
+        'ClipboardJS': 'https://unpkg.com/clipboard@2.0.8/dist/clipboard'
+      }
+    });
+
+    document.querySelector('#ua').value = navigator.userAgent;
+    document.querySelector('#appver').value = navigator.appVersion;
+
+    require(['ClipboardJS'], function (ClipboardJS) {
+      new ClipboardJS('.btn');
+    })
+  </script>
+
+</body>
+
+
+
+</html>
